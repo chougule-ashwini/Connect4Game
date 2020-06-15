@@ -5,6 +5,7 @@ class Connect4 {
     constructor(target) {
         this.ROWS = 6;
         this.COLS = 7;
+        this.player = 'blue';
         this.target = target;
         this.creatLayout();
         this.eventListner();
@@ -23,6 +24,9 @@ class Connect4 {
             }
             $layout.append($row);
         }
+        // Show which player has turn.
+        document.getElementById('turn').innerHTML = this.player;
+        document.getElementById('turn').style.color = this.player;
     }
     eventListner() {
         const $layout = $(this.target);
@@ -44,22 +48,25 @@ class Connect4 {
             console.log(this);
             const columnIndex = $(this).data('col');
             const $lastEmptyCell = findLastEmptyCell(columnIndex);
-            $($lastEmptyCell).addClass('hover-blue');
+            $($lastEmptyCell).addClass('hover-' + self.player);
         });
 
         $layout.on("mouseleave", '.col.empty', function () {
-            $('.col').removeClass('hover-blue');
+            $('.col').removeClass('hover-' + self.player);
         });
 
         $layout.on("click", '.col.empty', function () {
-            $('.col').removeClass('hover-blue');
+            $('.col').removeClass('hover-' + self.player);
 
             const columnIndex = $(this).data('col');
             const rowIndex = $(this).data('row');
             const $lastEmptyCell = findLastEmptyCell(columnIndex);
-            $($lastEmptyCell).removeClass('empty hover-blue');
-            $($lastEmptyCell).addClass('blue');
-
+            $($lastEmptyCell).removeClass('empty hover-' + self.player);
+            $($lastEmptyCell).addClass(self.player);
+            //Switch Player
+            self.player = self.player == 'blue' ? 'red' : 'blue';
+            document.getElementById('turn').innerHTML = self.player;
+            document.getElementById('turn').style.color = self.player;
         });
     }
 }
