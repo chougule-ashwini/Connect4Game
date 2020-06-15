@@ -67,6 +67,7 @@ class Connect4 {
             const winner = isWinner($lastEmptyCell.dataset.col, $lastEmptyCell.dataset.row);
             if (winner) {
                 alert(self.player.charAt(0).toUpperCase() + self.player.slice(1) + " player is winner.");
+                $('.col').removeClass('red blue').addClass('empty');
             } else {
                 //Switch Player
                 self.player = self.player == 'blue' ? 'red' : 'blue';
@@ -187,7 +188,7 @@ class Connect4 {
                 else
                     return false;
             }
-            
+
             return checkVerticle() || checkHorizontal() || checkDiagonal();
         }
     }
