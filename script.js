@@ -63,10 +63,49 @@ class Connect4 {
             const $lastEmptyCell = findLastEmptyCell(columnIndex);
             $($lastEmptyCell).removeClass('empty hover-' + self.player);
             $($lastEmptyCell).addClass(self.player);
-            //Switch Player
-            self.player = self.player == 'blue' ? 'red' : 'blue';
-            document.getElementById('turn').innerHTML = self.player;
-            document.getElementById('turn').style.color = self.player;
+
+            const winner = isWinner($lastEmptyCell.dataset.col, $lastEmptyCell.dataset.row);
+            if (winner) {
+                alert(self.player.charAt(0).toUpperCase() + self.player.slice(1) + " player is winner.");
+            } else {
+                //Switch Player
+                self.player = self.player == 'blue' ? 'red' : 'blue';
+                document.getElementById('turn').innerHTML = self.player;
+                document.getElementById('turn').style.color = self.player;
+            }
         });
+        function isWinner(columnIndex, rowIndex) {
+            columnIndex = parseInt(columnIndex);
+            rowIndex = parseInt(rowIndex);
+
+            function getCell(c, r) {
+                if ($('.col[data-col="' + c + '"][data-row="' + r + '"]').hasClass(self.player))
+                    return true;
+                else
+                    return false;
+            }
+
+            function checkVerticle() {
+                var total = 0;
+                for (let i = rowIndex; i < 6; i++) {
+                    if (getCell(columnIndex, i)) {
+                        total = total + 1;
+                        if (total >= 4)
+                            return true;
+                    } else
+                        return false;
+                }
+                return false;
+            }
+
+            function checkHorizontal() {
+                return false;
+            }
+
+            function checkDiagonal() {
+                return false;
+            }
+            return checkVerticle() || checkHorizontal() || checkDiagonal();
+        }
     }
 }
