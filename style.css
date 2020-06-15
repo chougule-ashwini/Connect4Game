@@ -38,3 +38,13 @@ p {
 #connect4 .row {
     height: 60px;
 }
+
+#connect4 .hover-blue,
+#connect4 .blue {
+    background-color: #27729a;
+}
+
+#connect4 .hover-red,
+#connect4 .red {
+    background-color: #da8557;
+}
