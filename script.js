@@ -50,5 +50,16 @@ class Connect4 {
         $layout.on("mouseleave", '.col.empty', function () {
             $('.col').removeClass('hover-blue');
         });
+
+        $layout.on("click", '.col.empty', function () {
+            $('.col').removeClass('hover-blue');
+
+            const columnIndex = $(this).data('col');
+            const rowIndex = $(this).data('row');
+            const $lastEmptyCell = findLastEmptyCell(columnIndex);
+            $($lastEmptyCell).removeClass('empty hover-blue');
+            $($lastEmptyCell).addClass('blue');
+
+        });
     }
 }
