@@ -131,9 +131,63 @@ class Connect4 {
                     return false;
             }
 
-            function checkDiagonal() {
-                return false;
+            function countLeftUp() {
+                var total = 0;
+                for (let i = (columnIndex - 1), j = (rowIndex - 1); i >= 0, j >= 0; i--, j--) {
+                    if (getCell(i, j)) {
+                        total = total + 1;
+                        console.log("total:", total);
+                    } else
+                        return total;
+                }
+                return total;
             }
+
+            function countRightDown() {
+                var total = 0;
+                for (let i = (columnIndex + 1), j = (rowIndex + 1); i <= 6, j <= 5; i++, j++) {
+                    if (getCell(i, j)) {
+                        total = total + 1;
+                        console.log("total:", total);
+                    } else
+                        return total;
+                }
+                return total;
+            }
+
+            function countLeftDown() {
+                var total = 0;
+                for (let i = (columnIndex - 1), j = (rowIndex + 1); i >= 0, j <= 5; i--, j++) {
+                    if (getCell(i, j)) {
+                        total = total + 1;
+                        console.log("total:", total);
+                    } else
+                        return total;
+                }
+                return total;
+            }
+            function countRightUp() {
+                var total = 0;
+                for (let i = (columnIndex + 1), j = (rowIndex - 1); i <= 6, j >= 0; i++, j--) {
+                    if (getCell(i, j)) {
+                        total = total + 1;
+                        console.log("total:", total);
+                    } else
+                        return total;
+                }
+                return total;
+            }
+
+            function checkDiagonal() {
+                var backSlashTotal = 0, forwardSlashTotal = 0;
+                backSlashTotal = 1 + countLeftUp() + countRightDown();
+                forwardSlashTotal = 1 + countLeftDown() + countRightUp();
+                if (backSlashTotal >= 4 || forwardSlashTotal >= 4)
+                    return true;
+                else
+                    return false;
+            }
+            
             return checkVerticle() || checkHorizontal() || checkDiagonal();
         }
     }
