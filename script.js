@@ -98,8 +98,37 @@ class Connect4 {
                 return false;
             }
 
+            function countLeft() {
+                var total = 0;
+                for (let i = (columnIndex - 1); i >= 0; i--) {
+                    if (getCell(i, rowIndex)) {
+                        total = total + 1;
+                        console.log("total:", total);
+                    } else
+                        return total;
+                }
+                return total;
+            }
+
+            function countRight() {
+                var total = 0;
+                for (let i = (columnIndex + 1); i <= 6; i++) {
+                    if (getCell(i, rowIndex)) {
+                        total = total + 1;
+                        console.log("total:", total);
+                    } else
+                        return total;
+                }
+                return total;
+            }
+
             function checkHorizontal() {
-                return false;
+                var total = 0;
+                total = 1 + countLeft() + countRight();
+                if (total >= 4)
+                    return true;
+                else
+                    return false;
             }
 
             function checkDiagonal() {
