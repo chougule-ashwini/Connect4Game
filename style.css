@@ -48,3 +48,8 @@ p {
 #connect4 .red {
     background-color: #da8557;
 }
+
+//hover effect
+#connect4 .hover-blue,#connect4 .hover-red{
+    box-shadow: 0px 0px 10px #000;
+}
